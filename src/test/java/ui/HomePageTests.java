@@ -5,7 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -176,5 +179,24 @@ class HomePageTests {
         assertEquals(expectedPageName, actualPageName, "Page name is incorrect.");
 
         driver.navigate().back();
+    }
+
+    @Test
+    void openAllLinksTest() {
+        int qtyLinks = 0;
+        List<WebElement> chapters = driver.findElements(By.cssSelector("h5.card-title"));
+        for (WebElement chapter : chapters) {
+            List<WebElement> links = chapter.findElements(By.xpath("./../a"));
+            qtyLinks += links.size();
+            System.out.println(chapter.getText());
+            for (WebElement link : links) {
+                System.out.println(link.getText());
+                link.click();
+                driver.navigate().back();
+            }
+        }
+
+        assertEquals(6, chapters.size(), "Links count is incorrect.");
+        assertEquals(27, qtyLinks);
     }
 }
