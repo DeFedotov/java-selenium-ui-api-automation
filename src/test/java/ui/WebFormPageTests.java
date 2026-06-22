@@ -1,11 +1,9 @@
 package ui;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.Select;
 
 import java.io.IOException;
@@ -145,5 +143,21 @@ public class WebFormPageTests {
 
         WebElement radioButton2 = driver.findElement(By.id("my-radio-2"));
         Assertions.assertFalse(radioButton2.isSelected(),"Radio button is selected!");
+    }
+
+    @Test
+    @DisplayName("Color picker test")
+    void verifyColorPickerTest() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        WebElement colorPicker = driver.findElement(By.name("my-colors"));
+        String initColor = colorPicker.getAttribute("value");
+
+        Color red = new Color(255, 0, 0, 1);
+        colorPicker.sendKeys(red.asHex());
+
+        String finalColor = colorPicker.getAttribute("value");
+        Assertions.assertNotNull(finalColor);
+        Assertions.assertEquals(Color.fromString(finalColor),red,"Color picker is incorrect.");
     }
 }
