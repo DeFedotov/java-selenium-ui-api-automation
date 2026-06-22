@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class WebFormPageTests {
@@ -159,5 +161,34 @@ public class WebFormPageTests {
         String finalColor = colorPicker.getAttribute("value");
         Assertions.assertNotNull(finalColor);
         Assertions.assertEquals(Color.fromString(finalColor),red,"Color picker is incorrect.");
+    }
+
+    @Test
+    @DisplayName("Date picker test")
+    void verifyDatePickerTest() {
+        LocalDate today = LocalDate.now();
+        int tomorrow = today.plusDays(30).getDayOfMonth();
+        System.out.println(tomorrow);
+
+        WebElement datePicker = driver.findElement(By.name("my-date"));
+        datePicker.sendKeys("06/22/2026");
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String actualDate = datePicker.getAttribute("value");
+        String expectedDate = today.format(dateFormat);;
+        Assertions.assertEquals(expectedDate,actualDate,"Date picker is incorrect.");
+    }
+
+    @Test
+    @DisplayName("Range test")
+    void verifyRangeTest() {
+        WebElement range = driver.findElement(By.name("my-range"));
+
+        for (int i = 0; i < 3; i++) {
+            range.sendKeys(Keys.ARROW_RIGHT);
+        }
+
+        String actualRange = range.getAttribute("value");
+        Assertions.assertEquals("8",actualRange,"Range is incorrect.");
     }
 }
