@@ -126,4 +126,24 @@ public class WebFormPageTests {
         String actualPage = driver.findElement(By.xpath("//p[contains(text(), 'Received!')]")).getText();
         Assertions.assertEquals("Received!",actualPage,"Page is incorrect.");
     }
+
+    @Test
+    @DisplayName("Checkboxes test")
+    void verifyCheckboxesTest() {
+        WebElement checkbox = driver.findElement(By.id("my-check-1"));
+        Assertions.assertTrue(checkbox.isSelected(),"Checkbox is incorrect.");
+
+        WebElement checkbox2 = driver.findElement(By.id("my-check-2"));
+        Assertions.assertFalse(checkbox2.isSelected(),"Checkbox is incorrect.");
+    }
+
+    @Test
+    @DisplayName("Radio buttons tests")
+    void verifyRadioButtonsTest() {
+        WebElement radioButton = driver.findElement(By.id("my-radio-1"));
+        Assertions.assertTrue(radioButton.isSelected(),"Radio button is not selected!");
+
+        WebElement radioButton2 = driver.findElement(By.id("my-radio-2"));
+        Assertions.assertFalse(radioButton2.isSelected(),"Radio button is selected!");
+    }
 }
