@@ -109,6 +109,7 @@ public class WebFormPageTests {
         dataList.click();
         WebElement option = driver.findElement(By.xpath("//datalist/option[2]"));
         String optionValue = option.getAttribute("value");
+        Assertions.assertNotNull(optionValue);
         dataList.sendKeys(optionValue);
 
         Assertions.assertEquals("New York", optionValue,"New York must be selected.");
