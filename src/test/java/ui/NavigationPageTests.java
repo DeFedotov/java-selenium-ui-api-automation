@@ -19,10 +19,8 @@ public class NavigationPageTests {
     }
 
     @AfterEach
-    void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    public void tearDown() {
+        driver.quit();
     }
 
     @Test

@@ -24,10 +24,8 @@ class HomePageTests {
     }
 
     @AfterEach
-    void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    public void tearDown() {
+        driver.quit();
     }
 
     @Test
