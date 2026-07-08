@@ -65,4 +65,15 @@ public class CookiesPageTests {
 
         driver.findElement(By.id("refresh-cookies")).click();
     }
+
+    @Test
+    @DisplayName("Delete cookie test")
+    public void deleteCookieTest(){
+        WebDriver.Options options = driver.manage();
+        Set<Cookie> cookies = options.getCookies();
+        Cookie username = options.getCookieNamed("username");
+        options.deleteCookie(username);
+
+        Assertions.assertEquals(cookies.size()-1, options.getCookies().size());
+    }
 }
