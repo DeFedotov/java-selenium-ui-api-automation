@@ -38,4 +38,17 @@ public class CookiesPageTests {
 
         driver.findElement(By.id("refresh-cookies")).click();
     }
+
+    @Test
+    @DisplayName("Add cookies test")
+    public void addCookiesTest() {
+        WebDriver.Options options = driver.manage();
+        Cookie newCookie = new Cookie("new-cookie-key", "new-cookie-value");
+        options.addCookie(newCookie);
+
+        String readValue = options.getCookieNamed(newCookie.getName()).getValue();
+        Assertions.assertEquals(newCookie.getValue(), readValue);
+
+        driver.findElement(By.id("refresh-cookies")).click();
+    }
 }
