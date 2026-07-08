@@ -51,4 +51,18 @@ public class CookiesPageTests {
 
         driver.findElement(By.id("refresh-cookies")).click();
     }
+
+    @Test
+    @DisplayName("Edit cookie test")
+    public void editCookieTest(){
+        WebDriver.Options options = driver.manage();
+        Cookie username = options.getCookieNamed("username");
+        Cookie editedCookie = new Cookie(username.getName(), "new-value");
+        options.addCookie(editedCookie);
+
+        Cookie readCookie  = options.getCookieNamed(username.getName());
+        Assertions.assertEquals(editedCookie, readCookie);
+
+        driver.findElement(By.id("refresh-cookies")).click();
+    }
 }
