@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -59,5 +60,16 @@ public class DialogBoxesPageTests {
         prompt.sendKeys("John Doe");
         Assertions.assertEquals(prompt.getText(), "Please enter your name");
         prompt.accept();
+    }
+
+    @Test
+    @DisplayName("Modal window test")
+    public void modalWindowTest() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        driver.findElement(By.id("my-modal")).click();
+        WebElement close =  driver.findElement(By.xpath("//button[text()='Close']"));
+        Assertions.assertEquals(close.getTagName(), "button");
+        wait.until(ExpectedConditions.elementToBeClickable(close));
+        close.click();
     }
 }
