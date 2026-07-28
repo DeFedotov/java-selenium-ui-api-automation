@@ -37,4 +37,15 @@ public class DialogBoxesPageTests {
         Assertions.assertEquals(alert.getText(), "Hello world!");
         alert.accept();
     }
+
+    @Test
+    @DisplayName("Confirm test")
+    public void confirmTest() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        driver.findElement(By.id("my-confirm")).click();
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert confirm = driver.switchTo().alert();
+        Assertions.assertEquals(confirm.getText(), "Is this correct?");
+        confirm.dismiss();
+    }
 }
