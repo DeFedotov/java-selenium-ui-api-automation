@@ -48,4 +48,16 @@ public class DialogBoxesPageTests {
         Assertions.assertEquals(confirm.getText(), "Is this correct?");
         confirm.dismiss();
     }
+
+    @Test
+    @DisplayName("Prompt name")
+    public void promptTest() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        driver.findElement(By.id("my-prompt")).click();
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert prompt = driver.switchTo().alert();
+        prompt.sendKeys("John Doe");
+        Assertions.assertEquals(prompt.getText(), "Please enter your name");
+        prompt.accept();
+    }
 }
