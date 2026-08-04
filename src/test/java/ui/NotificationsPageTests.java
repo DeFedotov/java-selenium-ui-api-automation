@@ -1,11 +1,11 @@
 package ui;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import static constants.Constants.BASE_URL;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -14,7 +14,6 @@ import java.util.Map;
 public class NotificationsPageTests {
 
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String NOTIFICATIONS_URL = BASE_URL + "notifications.html";
 
     @BeforeEach

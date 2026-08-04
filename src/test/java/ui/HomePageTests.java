@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import static constants.Constants.BASE_URL;
 
 import java.util.List;
 
@@ -14,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HomePageTests {
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
 
     @BeforeEach
     void setUp() {

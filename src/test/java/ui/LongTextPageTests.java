@@ -5,15 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
-import org.openqa.selenium.bidi.module.Script;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import static constants.Constants.BASE_URL;
 
 import java.time.Duration;
 
 public class LongTextPageTests {
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String LONG_PAGE_URL = BASE_URL + "long-page.html";
 
     @BeforeEach

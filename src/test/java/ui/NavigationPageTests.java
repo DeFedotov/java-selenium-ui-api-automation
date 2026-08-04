@@ -4,11 +4,11 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import static constants.Constants.BASE_URL;
 
 public class NavigationPageTests {
 
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String NAVIGATION_URL = BASE_URL + "navigation1.html";
 
     @BeforeEach

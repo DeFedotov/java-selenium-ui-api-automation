@@ -7,13 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static constants.Constants.BASE_URL;
 
 import java.time.Duration;
 import java.util.List;
 
 public class FramePageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String FRAME_URL = BASE_URL + "frames.html";
 
     @BeforeEach
