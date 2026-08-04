@@ -7,12 +7,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.*;
+import static constants.Constants.BASE_URL;
 
 import java.time.Duration;
 
 public class LoadingImagesPageTests {
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String LOADING_IMAGES_URL = BASE_URL + "loading-images.html";
 
     @BeforeEach

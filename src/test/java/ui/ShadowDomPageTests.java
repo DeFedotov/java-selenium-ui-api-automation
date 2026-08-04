@@ -6,10 +6,10 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import static constants.Constants.BASE_URL;
 
 public class ShadowDomPageTests {
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String SHADOW_DOM_URL = BASE_URL + "shadow-dom.html";
 
     @BeforeEach

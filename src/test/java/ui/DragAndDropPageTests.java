@@ -1,6 +1,5 @@
 package ui;
 
-import jdk.jfr.Threshold;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -8,10 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import static constants.Constants.BASE_URL;
 
 public class DragAndDropPageTests {
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String DRAG_AND_DROP_URL = BASE_URL + "drag-and-drop.html";
 
     @BeforeEach

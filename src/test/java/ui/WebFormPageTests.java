@@ -11,11 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import static constants.Constants.BASE_URL;
 
 public class WebFormPageTests {
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String WEB_FORM_URL = BASE_URL + "web-form.html";
 
     @BeforeEach

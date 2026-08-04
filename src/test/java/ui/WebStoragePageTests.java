@@ -2,14 +2,13 @@ package ui;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import static constants.Constants.BASE_URL;
 
 public class WebStoragePageTests {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String WEB_STORAGE_URL = BASE_URL + "web-storage.html";
 
     @BeforeEach

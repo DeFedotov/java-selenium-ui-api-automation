@@ -9,12 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static constants.Constants.BASE_URL;
 
 import java.time.Duration;
 
 public class SlowCalculatorPageTests {
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String SLOW_CALCULATOR_URL = BASE_URL + "slow-calculator.html";
 
     @BeforeEach

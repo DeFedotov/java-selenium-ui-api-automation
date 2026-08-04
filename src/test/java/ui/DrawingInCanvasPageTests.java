@@ -9,10 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import static constants.Constants.BASE_URL;
 
 public class DrawingInCanvasPageTests {
     private WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     private static final String DRAW_IN_CANVAS_URL = BASE_URL + "draw-in-canvas.html";
 
     @BeforeEach
