@@ -1,5 +1,6 @@
 package ui;
 
+import configs.TestConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import static constants.Constants.BASE_URL;
 
 import java.util.List;
 
@@ -15,11 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HomePageTests {
     private WebDriver driver;
+    TestConfig config = new TestConfig();
 
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(config.getBaseUrl());
         driver.manage().window().maximize();
     }
 
@@ -164,7 +165,7 @@ class HomePageTests {
     }
 
     void verifyPage(String pageHtml, String expectedPageName, String chapterName) {
-        String expectedUrl = BASE_URL + pageHtml;
+        String expectedUrl = config.getBaseUrl() + pageHtml;
 
         String complexXpath = "//h5[text()='" + chapterName + "']/../a[contains(@href, '" + pageHtml + "')]";
 
