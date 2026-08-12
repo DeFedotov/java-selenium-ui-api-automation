@@ -38,3 +38,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+src/test/resources/*.properties
+src/main/resources/*.properties
