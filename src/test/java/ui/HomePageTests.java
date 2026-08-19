@@ -1,6 +1,5 @@
 package ui;
 
-import configs.TestConfig;
 import configs.TestPropertiesConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
