@@ -2,31 +2,17 @@ package ui;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import static constants.Constants.BASE_URL;
 
-public class DropDownPageTests {
-    private WebDriver driver;
+public class DropDownPageTests extends BaseTest{
     private static final String DROP_DOWN_URL = BASE_URL + "dropdown-menu.html";
-
-    @BeforeEach
-    void setUp() {
-        driver = new ChromeDriver();
-        driver.get(DROP_DOWN_URL);
-        driver.manage().window().maximize();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
 
     @Test
     @DisplayName("Left-click test")
     void leftClickTest() {
+        driver.get(DROP_DOWN_URL);
         Actions actions = new Actions(driver);
 
         WebElement dropdown1 = driver.findElement(By.id("my-dropdown-1"));
@@ -42,6 +28,7 @@ public class DropDownPageTests {
     @Test
     @DisplayName("Right-click test")
     void rightClickTest() {
+        driver.get(DROP_DOWN_URL);
         Actions actions = new Actions(driver);
 
         WebElement dropdown2 = driver.findElement(By.id("my-dropdown-2"));
@@ -57,6 +44,7 @@ public class DropDownPageTests {
     @Test
     @DisplayName("Double-click test")
     void doubleClickTest() {
+        driver.get(DROP_DOWN_URL);
         Actions actions = new Actions(driver);
 
         WebElement dropdown3 = driver.findElement(By.id("my-dropdown-3"));

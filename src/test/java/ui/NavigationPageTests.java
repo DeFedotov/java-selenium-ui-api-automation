@@ -2,30 +2,15 @@ package ui;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import static constants.Constants.BASE_URL;
 
-public class NavigationPageTests {
-
-    private WebDriver driver;
+public class NavigationPageTests extends BaseTest {
     private static final String NAVIGATION_URL = BASE_URL + "navigation1.html";
-
-    @BeforeEach
-    void setUp() {
-        driver = new ChromeDriver();
-        driver.get(NAVIGATION_URL);
-        driver.manage().window().maximize();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
 
     @Test
     @DisplayName("Navigation test")
     void navigationPageTest() {
+        driver.get(NAVIGATION_URL);
         driver.findElement(By.xpath("//a[text()='Next']")).click();
         driver.findElement(By.xpath("//a[text()='3']")).click();
         driver.findElement(By.xpath("//a[text()='Previous']")).click();
