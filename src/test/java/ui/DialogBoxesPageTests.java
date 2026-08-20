@@ -3,9 +3,7 @@ package ui;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static constants.Constants.BASE_URL;
@@ -13,25 +11,13 @@ import static constants.Constants.BASE_URL;
 
 import java.time.Duration;
 
-public class DialogBoxesPageTests {
-    WebDriver driver;
+public class DialogBoxesPageTests extends BaseTest{
     private static final String DIALOG_BOXES_URL = BASE_URL + "dialog-boxes.html";
-
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get(DIALOG_BOXES_URL);
-        driver.manage().window().maximize();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
 
     @Test
     @DisplayName("Alert test")
     public void alertTest() {
+        driver.get(DIALOG_BOXES_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.findElement(By.id("my-alert")).click();
         wait.until(ExpectedConditions.alertIsPresent());
@@ -43,6 +29,7 @@ public class DialogBoxesPageTests {
     @Test
     @DisplayName("Confirm test")
     public void confirmTest() {
+        driver.get(DIALOG_BOXES_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.findElement(By.id("my-confirm")).click();
         wait.until(ExpectedConditions.alertIsPresent());
@@ -54,6 +41,7 @@ public class DialogBoxesPageTests {
     @Test
     @DisplayName("Prompt name")
     public void promptTest() {
+        driver.get(DIALOG_BOXES_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.findElement(By.id("my-prompt")).click();
         wait.until(ExpectedConditions.alertIsPresent());
@@ -66,6 +54,7 @@ public class DialogBoxesPageTests {
     @Test
     @DisplayName("Modal window test")
     public void modalWindowTest() {
+        driver.get(DIALOG_BOXES_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.findElement(By.id("my-modal")).click();
         WebElement close =  driver.findElement(By.xpath("//button[text()='Close']"));

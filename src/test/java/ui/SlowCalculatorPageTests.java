@@ -1,37 +1,22 @@
 package ui;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static constants.Constants.BASE_URL;
 
 import java.time.Duration;
 
-public class SlowCalculatorPageTests {
-    private WebDriver driver;
+public class SlowCalculatorPageTests extends BaseTest {
     private static final String SLOW_CALCULATOR_URL = BASE_URL + "slow-calculator.html";
-
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get(SLOW_CALCULATOR_URL);
-        driver.manage().window().maximize();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
 
     @Test
     @DisplayName("Slow calulator test")
     public void slowCalculatorTest() {
+        driver.get(SLOW_CALCULATOR_URL);
         driver.findElement(By.xpath("//span[text()='5']")).click();
         driver.findElement(By.xpath("//span[text()='x']")).click();
         driver.findElement(By.xpath("//span[text()='7']")).click();

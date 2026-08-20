@@ -5,32 +5,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.*;
 import static constants.Constants.BASE_URL;
 
 import java.time.Duration;
 
-public class LoadingImagesPageTests {
-    private WebDriver driver;
+public class LoadingImagesPageTests extends BaseTest{
     private static final String LOADING_IMAGES_URL = BASE_URL + "loading-images.html";
-
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get(LOADING_IMAGES_URL);
-        driver.manage().window().maximize();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
 
     @Test
     @DisplayName("Loading images using implicit wait")
     public void loadingImagesImplicitWaitTest() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get(LOADING_IMAGES_URL);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(8));
 
         WebElement actualCaption = driver.findElement(By.id("landscape"));
         Assertions.assertTrue(actualCaption.isDisplayed());
@@ -39,6 +26,7 @@ public class LoadingImagesPageTests {
     @Test
     @DisplayName("Loading images using explicit wait")
     public void loadingImagesExplicitWaitTest() {
+        driver.get(LOADING_IMAGES_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         WebElement actualCaption = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("landscape")));
@@ -46,8 +34,9 @@ public class LoadingImagesPageTests {
     }
 
     @Test
-    @DisplayName("Loading images using explicit wait")
+    @DisplayName("Loading images using fluent wait")
     public void loadingImagesFluentWaitTest() {
+        driver.get(LOADING_IMAGES_URL);
         Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofSeconds(1))

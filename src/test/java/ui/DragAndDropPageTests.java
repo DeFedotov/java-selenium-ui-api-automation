@@ -3,31 +3,17 @@ package ui;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import static constants.Constants.BASE_URL;
 
-public class DragAndDropPageTests {
-    private WebDriver driver;
+public class DragAndDropPageTests extends BaseTest{
     private static final String DRAG_AND_DROP_URL = BASE_URL + "drag-and-drop.html";
-
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get(DRAG_AND_DROP_URL);
-        driver.manage().window().maximize();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
 
     @Test
     @DisplayName("Drag and drop test")
-    public void dragAndDropTest() throws InterruptedException {
+    public void dragAndDropTest() {
+        driver.get(DRAG_AND_DROP_URL);
         Actions actions = new Actions(driver);
 
         WebElement source = driver.findElement(By.id("draggable"));
