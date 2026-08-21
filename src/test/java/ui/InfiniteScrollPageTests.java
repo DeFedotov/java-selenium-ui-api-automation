@@ -1,5 +1,6 @@
 package ui;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -7,18 +8,22 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static constants.Constants.BASE_URL;
+import static constants.Constants.INFINITE_SCROLL_URL;
 
 import java.time.Duration;
 import java.util.List;
 
 public class InfiniteScrollPageTests extends BaseTest{
-    private static final String INFINITE_SCROLL_URL = BASE_URL + "infinite-scroll.html";
+
+    @BeforeEach
+    public void setup() {
+        driver.get(INFINITE_SCROLL_URL);
+    }
 
     @Test
     @DisplayName("Infinite scroll test")
     public void infiniteScrollTest() {
-        driver.get(INFINITE_SCROLL_URL);
+
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

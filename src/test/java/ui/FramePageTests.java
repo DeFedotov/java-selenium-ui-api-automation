@@ -5,18 +5,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static constants.Constants.BASE_URL;
+import static constants.Constants.FRAME_URL;
 
 import java.time.Duration;
 import java.util.List;
 
 public class FramePageTests extends BaseTest{
-    private static final String FRAME_URL = BASE_URL + "frames.html";
+
+    @BeforeEach
+    public void setup(){
+        driver.get(FRAME_URL);
+    }
 
     @Test
     @DisplayName("IFrame test")
     public void iFrameTest() {
-        driver.get(FRAME_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String frameName = "frame-body";
         wait.until(ExpectedConditions.presenceOfElementLocated(By.name(frameName)));

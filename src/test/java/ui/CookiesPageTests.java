@@ -7,15 +7,18 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
 
-import static constants.Constants.BASE_URL;
+import static constants.Constants.COOKIES_URL;
 
 public class CookiesPageTests extends BaseTest{
-    private static final String COOKIES_URL = BASE_URL + "cookies.html";
+
+    @BeforeEach
+    public void setup() {
+        driver.get(COOKIES_URL);
+    }
 
     @Test
     @DisplayName("Read cookies test")
     public void readCookiesTest() {
-        driver.get(COOKIES_URL);
         WebDriver.Options options = driver.manage();
         Set<Cookie> cookies = options.getCookies();
         Assertions.assertEquals(cookies.size(), 2);
@@ -30,7 +33,6 @@ public class CookiesPageTests extends BaseTest{
     @Test
     @DisplayName("Add cookies test")
     public void addCookiesTest() {
-        driver.get(COOKIES_URL);
         WebDriver.Options options = driver.manage();
         Cookie newCookie = new Cookie("new-cookie-key", "new-cookie-value");
         options.addCookie(newCookie);
@@ -44,7 +46,6 @@ public class CookiesPageTests extends BaseTest{
     @Test
     @DisplayName("Edit cookie test")
     public void editCookieTest(){
-        driver.get(COOKIES_URL);
         WebDriver.Options options = driver.manage();
         Cookie username = options.getCookieNamed("username");
         Cookie editedCookie = new Cookie(username.getName(), "new-value");
@@ -59,7 +60,6 @@ public class CookiesPageTests extends BaseTest{
     @Test
     @DisplayName("Delete cookie test")
     public void deleteCookieTest(){
-        driver.get(COOKIES_URL);
         WebDriver.Options options = driver.manage();
         Set<Cookie> cookies = options.getCookies();
         Cookie username = options.getCookieNamed("username");

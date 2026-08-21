@@ -10,14 +10,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import static constants.Constants.BASE_URL;
+import static constants.Constants.WEB_FORM_URL;
 
 public class WebFormPageTests extends BaseTest {
-    private static final String WEB_FORM_URL = BASE_URL + "web-form.html";
+
+    @BeforeEach
+    public void setup() {
+        driver.get(WEB_FORM_URL);
+    }
 
     @Test
     void verifyTextInputFieldTest(){
-        driver.get(WEB_FORM_URL);
         WebElement textInputField = driver.findElement(By.id("my-text-id"));
         textInputField.clear();
         String expectedText = "Test input...";
@@ -30,7 +33,6 @@ public class WebFormPageTests extends BaseTest {
 
     @Test
     void verifyPasswordInputFieldTest(){
-        driver.get(WEB_FORM_URL);
         WebElement passwordInputField = driver.findElement(By.name("my-password"));
         passwordInputField.clear();
         String expectedPassword = "TestPass123$";
@@ -43,7 +45,6 @@ public class WebFormPageTests extends BaseTest {
 
     @Test
     void verifyTextAreInputFieldTest(){
-        driver.get(WEB_FORM_URL);
         WebElement textInputField = driver.findElement(By.name("my-textarea"));
         textInputField.clear();
         String expectedText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n" +
@@ -59,7 +60,6 @@ public class WebFormPageTests extends BaseTest {
 
     @Test
     void verifyDisabledInputFieldTest(){
-        driver.get(WEB_FORM_URL);
         WebElement disabledInputField = driver.findElement(By.name("my-disabled"));
 
         String attributeValue = disabledInputField.getAttribute("placeholder");
@@ -69,7 +69,6 @@ public class WebFormPageTests extends BaseTest {
 
     @Test
     void verifyReadOnlyFieldTest(){
-        driver.get(WEB_FORM_URL);
         WebElement readOnlyInputField = driver.findElement(By.name("my-readonly"));
 
         String attributeValue = readOnlyInputField.getAttribute("value");
@@ -78,7 +77,6 @@ public class WebFormPageTests extends BaseTest {
 
     @Test
     void verifyDropDownSelectFieldTest(){
-        driver.get(WEB_FORM_URL);
         WebElement dropDownField = driver.findElement(By.name("my-select"));
         Select select = new Select(dropDownField);
 
@@ -93,8 +91,6 @@ public class WebFormPageTests extends BaseTest {
     @Test
     @DisplayName("Dropdown (datalist) test: select option after entering value")
     void verifyDropDownDataListFieldTest(){
-        driver.get(WEB_FORM_URL);
-
         WebElement dataList = driver.findElement(By.name("my-datalist"));
         dataList.click();
         WebElement option = driver.findElement(By.xpath("//datalist/option[2]"));
@@ -108,7 +104,6 @@ public class WebFormPageTests extends BaseTest {
     @Test
     @DisplayName("Upload file test")
     void verifyUploadFileTest() throws IOException {
-        driver.get(WEB_FORM_URL);
         WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
         Path tempFile = Files.createTempFile("tempfiles", ".tmp");
         String filename = tempFile.toAbsolutePath().toString();
@@ -122,7 +117,6 @@ public class WebFormPageTests extends BaseTest {
     @Test
     @DisplayName("Checkboxes test")
     void verifyCheckboxesTest() {
-        driver.get(WEB_FORM_URL);
         WebElement checkbox = driver.findElement(By.id("my-check-1"));
         Assertions.assertTrue(checkbox.isSelected(),"Checkbox is incorrect.");
 
@@ -133,7 +127,6 @@ public class WebFormPageTests extends BaseTest {
     @Test
     @DisplayName("Radio buttons tests")
     void verifyRadioButtonsTest() {
-        driver.get(WEB_FORM_URL);
         WebElement radioButton = driver.findElement(By.id("my-radio-1"));
         Assertions.assertTrue(radioButton.isSelected(),"Radio button is not selected!");
 
@@ -144,7 +137,6 @@ public class WebFormPageTests extends BaseTest {
     @Test
     @DisplayName("Color picker test")
     void verifyColorPickerTest() {
-        driver.get(WEB_FORM_URL);
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         WebElement colorPicker = driver.findElement(By.name("my-colors"));
@@ -161,7 +153,6 @@ public class WebFormPageTests extends BaseTest {
     @Test
     @DisplayName("Date picker test")
     void verifyDatePickerTest() {
-        driver.get(WEB_FORM_URL);
         LocalDate today = LocalDate.now();
         int tomorrow = today.plusDays(30).getDayOfMonth();
         System.out.println(tomorrow);
@@ -179,7 +170,6 @@ public class WebFormPageTests extends BaseTest {
     @Test
     @DisplayName("Range test")
     void verifyRangeTest() {
-        driver.get(WEB_FORM_URL);
         WebElement range = driver.findElement(By.name("my-range"));
 
         for (int i = 0; i < 3; i++) {

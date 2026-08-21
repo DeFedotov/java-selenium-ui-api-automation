@@ -5,18 +5,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static constants.Constants.BASE_URL;
+import static constants.Constants.IFRAME_URL;
 
 import java.time.Duration;
 import java.util.List;
 
 public class IFrameTests extends BaseTest {
-    private static final String IFRAME_URL = BASE_URL + "iframes.html";
+
+    @BeforeEach
+    public void setup() {
+        driver.get(IFRAME_URL);
+    }
 
     @Test
     @DisplayName("IFrame test")
     public void iFrameTest() {
-        driver.get(IFRAME_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("my-iframe"));
 

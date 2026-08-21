@@ -4,14 +4,18 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import static constants.Constants.BASE_URL;
+import static constants.Constants.NOTIFICATIONS_URL;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
 public class NotificationsPageTests extends BaseTest {
-    private static final String NOTIFICATIONS_URL = BASE_URL + "notifications.html";
+
+    @BeforeEach
+    public void setup() {
+        driver.get(NOTIFICATIONS_URL);
+    }
 
     @Test
     @DisplayName("Notification test with safe mock")
@@ -24,7 +28,7 @@ public class NotificationsPageTests extends BaseTest {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(10));
-        driver.get(NOTIFICATIONS_URL);
+
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         String script =
