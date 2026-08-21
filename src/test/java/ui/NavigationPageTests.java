@@ -2,15 +2,19 @@ package ui;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import static constants.Constants.BASE_URL;
+import static constants.Constants.NAVIGATION_URL;
 
 public class NavigationPageTests extends BaseTest {
-    private static final String NAVIGATION_URL = BASE_URL + "navigation1.html";
+
+    @BeforeEach
+    public void setup() {
+        driver.get(NAVIGATION_URL);
+    }
 
     @Test
     @DisplayName("Navigation test")
     void navigationPageTest() {
-        driver.get(NAVIGATION_URL);
+
         driver.findElement(By.xpath("//a[text()='Next']")).click();
         driver.findElement(By.xpath("//a[text()='3']")).click();
         driver.findElement(By.xpath("//a[text()='Previous']")).click();

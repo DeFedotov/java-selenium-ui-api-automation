@@ -3,15 +3,18 @@ package ui;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import static constants.Constants.BASE_URL;
+import static constants.Constants.WEB_STORAGE_URL;
 
 public class WebStoragePageTests extends BaseTest{
-    private static final String WEB_STORAGE_URL = BASE_URL + "web-storage.html";
+
+    @BeforeEach
+    public void setup(){
+        driver.get(WEB_STORAGE_URL);
+    }
 
     @Test
     @DisplayName("Web Storage test")
     public void webStorageTest() {
-        driver.get(WEB_STORAGE_URL);
         JavascriptExecutor js = (JavascriptExecutor) driver;
 //        Long localStorageSize = (Long) js.executeScript("return window.localStorage.length;");
 //        log.debug("Local storage elements: {}", localStorageSize);
