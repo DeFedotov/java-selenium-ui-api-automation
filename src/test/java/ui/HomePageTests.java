@@ -188,6 +188,22 @@ class HomePageTests extends BaseTest{
 //    }
 
     @Test
+    void verifyHomePageTitleTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+
+        assertEquals("Hands-On Selenium WebDriver with Java", homePage.getHomePageTitle());
+    }
+
+    @Test
+    void verifyHomePageUrlTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+
+        assertEquals("https://bonigarcia.dev/selenium-webdriver-java/", homePage.getHomePageUrl());
+    }
+
+    @Test
     void countAllLinksAndChaptersTest() {
         HomePage homePage = new HomePage(driver);
         homePage.openHomePage();
