@@ -14,6 +14,7 @@ public class HomePage extends BasePage{
 
     By chapterLocator = By.cssSelector("h5.card-title");
     By linkLocator = By.xpath("./../a");
+    By titleLocator = By.xpath("//h1[@class='display-4']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -31,7 +32,7 @@ public class HomePage extends BasePage{
 
     @Step("Get Home Page Title")
     public String getHomePageTitle() {
-        return driver.getTitle();
+        return driver.findElement(titleLocator).getText();
     }
 
     @Step("Count all chapters on Home Page")
