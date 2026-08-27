@@ -1,76 +1,91 @@
 package ui;
 
-import configs.TestPropertiesConfig;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import pageObjects.HomePage;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HomePageTests extends BaseTest{
-//    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-
-
-    //    @BeforeEach
-//    public void setup() {
-//        driver.get(config.getBaseUrl());
-//    }
 //
 //    @Test
 //    void openWebFormPageTest() {
-//        verifyPage("web-form.html", "Web form", "Chapter 3. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("web-form.html", "Web form", "Chapter 3. WebDriver Fundamentals");
 //    }
 //
 //    @Test
 //    void openNavigationPageTest() {
-//        verifyPage("navigation1.html", "Navigation example", "Chapter 3. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("navigation1.html", "Navigation example", "Chapter 3. WebDriver Fundamentals");
 //    }
 //
 //    @Test
 //    void openDropDownPageTest() {
-//        verifyPage("dropdown-menu.html", "Dropdown menu",  "Chapter 3. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("dropdown-menu.html", "Dropdown menu",  "Chapter 3. WebDriver Fundamentals");
 //    }
 //
 //    @Test
 //    void openMouseOverPageTest() {
-//        verifyPage("mouse-over.html", "Mouse over",  "Chapter 3. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("mouse-over.html", "Mouse over",  "Chapter 3. WebDriver Fundamentals");
 //    }
 //
 //    @Test
 //    void openDrugAndDropPageTest() {
-//        verifyPage("drag-and-drop.html",  "Drag and drop",   "Chapter 3. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("drag-and-drop.html",  "Drag and drop",   "Chapter 3. WebDriver Fundamentals");
 //    }
 //
 //    @Test
 //    void openDrawInCanvasPageTest() {
-//        verifyPage("draw-in-canvas.html", "Drawing in canvas",  "Chapter 3. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("draw-in-canvas.html", "Drawing in canvas",  "Chapter 3. WebDriver Fundamentals");
 //    }
 //
 //    @Test
 //    void openLoadingImagesPageTest() {
-//        verifyPage("loading-images.html", "Loading images",   "Chapter 3. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("loading-images.html", "Loading images",   "Chapter 3. WebDriver Fundamentals");
 //    }
 //
 //    @Test
 //    void openSlowCalculatorPageTest() {
-//        verifyPage("slow-calculator.html", "Slow calculator",    "Chapter 3. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("slow-calculator.html", "Slow calculator",    "Chapter 3. WebDriver Fundamentals");
 //    }
 //
 //    @Test
 //    void openLongPageTest() {
-//        verifyPage("long-page.html", "This is a long page",   "Chapter 4. Browser-Agnostic Features");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//
+//        homePage.verifyPage("long-page.html", "This is a long page",   "Chapter 4. Browser-Agnostic Features");
 //    }
 //
 //    @Test
 //    void openInfiniteScrollPageTest() {
-//        verifyPage("infinite-scroll.html", "Infinite scroll",   "Chapter 4. WebDriver Fundamentals");
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openHomePage();
+//        homePage.verifyPage("infinite-scroll.html", "Infinite scroll",   "Chapter 4. WebDriver Fundamentals");
 //    }
-//
+
 //    @Test
 //    void openShadowDomPageTest() {
 //        verifyPage("shadow-dom.html", "Shadow DOM",   "Chapter 4. WebDriver Fundamentals");
@@ -81,10 +96,10 @@ class HomePageTests extends BaseTest{
 //        verifyPage("cookies.html", "Cookies",   "Chapter 4. WebDriver Fundamentals");
 //    }
 //
-////    @Test
-////    void openFramesPageTest() {
-////        verifyPage("frames.html", "Frames",   "Chapter 4. WebDriver Fundamentals");
-////    }
+//    @Test
+//    void openFramesPageTest() {
+//        verifyPage("frames.html", "Frames",   "Chapter 4. WebDriver Fundamentals");
+//    }
 //
 //    @Test
 //    void openIframesPageTest() {
@@ -173,24 +188,14 @@ class HomePageTests extends BaseTest{
 //    }
 
     @Test
-    void openAllLinksTest() {
+    void countAllLinksAndChaptersTest() {
         HomePage homePage = new HomePage(driver);
         homePage.openHomePage();
 
-        int qtyLinks = 0;
-        List<WebElement> chapters = driver.findElements(By.cssSelector("h5.card-title"));
-        for (WebElement chapter : chapters) {
-            List<WebElement> links = chapter.findElements(By.xpath("./../a"));
-            qtyLinks += links.size();
-            System.out.println(chapter.getText());
-            for (WebElement link : links) {
-                System.out.println(link.getText());
-                link.click();
-                driver.navigate().back();
-            }
-        }
+        int actualChaptersCount = homePage.countChapters();
+        int actualLinksCount = homePage.countAndClickLinks();
 
-        assertEquals(6, chapters.size(), "Links count is incorrect.");
-        assertEquals(27, qtyLinks);
+        assertEquals(27, actualLinksCount, "Wrong number of links");
+        assertEquals(6, actualChaptersCount, "Wrong number of chapters");
     }
 }
