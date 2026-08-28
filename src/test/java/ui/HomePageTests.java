@@ -1,10 +1,14 @@
 package ui;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import pageObjects.HomePage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class HomePageTests extends BaseTest{
 //
 //    @Test
@@ -187,6 +191,7 @@ class HomePageTests extends BaseTest{
 //        driver.navigate().back();
 //    }
 
+    @Order(1)
     @Test
     void verifyHomePageTitleTest(){
         HomePage homePage = new HomePage(driver);
@@ -195,6 +200,7 @@ class HomePageTests extends BaseTest{
         assertEquals("Hands-On Selenium WebDriver with Java", homePage.getHomePageTitle());
     }
 
+    @Order(2)
     @Test
     void verifyHomePageUrlTest(){
         HomePage homePage = new HomePage(driver);
@@ -203,6 +209,7 @@ class HomePageTests extends BaseTest{
         assertEquals("https://bonigarcia.dev/selenium-webdriver-java/", homePage.getHomePageUrl());
     }
 
+    @Order(3)
     @Test
     void countAllLinksAndChaptersTest() {
         HomePage homePage = new HomePage(driver);
