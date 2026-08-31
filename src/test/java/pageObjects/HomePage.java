@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class HomePage extends BasePage{
     public static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
 
@@ -60,5 +58,10 @@ public class HomePage extends BasePage{
             }
         }
         return qtyLinks;
+    }
+
+    public LoginPage openLoginFormPage() {
+        driver.findElement(By.xpath("//a[@href='login-form.html']")).click();
+        return new LoginPage(driver);
     }
 }

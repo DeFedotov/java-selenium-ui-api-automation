@@ -146,11 +146,6 @@ class HomePageTests extends BaseTest{
 //    }
 //
 //    @Test
-//    void openLoginFormPageTest() {
-//        verifyPage("login-form.html", "Login form", "Chapter 7. The Page Object Model (POM)");
-//    }
-//
-//    @Test
 //    void openSlowLoginPageTest() {
 //        verifyPage("login-slow.html", "Slow login form", "Chapter 7. The Page Object Model (POM)");
 //    }
