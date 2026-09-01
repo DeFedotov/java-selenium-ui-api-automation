@@ -64,4 +64,9 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//a[@href='login-form.html']")).click();
         return new LoginPage(driver);
     }
+
+    public DialogBoxesPage openDialogBoxesPage() {
+        driver.findElement(By.xpath("//a[@href='dialog-boxes.html']")).click();
+        return new DialogBoxesPage(driver);
+    }
 }
