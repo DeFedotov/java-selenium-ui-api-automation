@@ -1,7 +1,6 @@
 package ui;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,28 +31,28 @@ public class DialogBoxesPageTests extends BaseTest{
 //        alert.accept();
 //    }
 
-    @Test
-    @DisplayName("Confirm test")
-    public void confirmTest() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        driver.findElement(By.id("my-confirm")).click();
-        wait.until(ExpectedConditions.alertIsPresent());
-        Alert confirm = driver.switchTo().alert();
-        assertEquals(confirm.getText(), "Is this correct?");
-        confirm.dismiss();
-    }
+//    @Test
+//    @DisplayName("Confirm test")
+//    public void confirmTest() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//        driver.findElement(By.id("my-confirm")).click();
+//        wait.until(ExpectedConditions.alertIsPresent());
+//        Alert confirm = driver.switchTo().alert();
+//        assertEquals(confirm.getText(), "Is this correct?");
+//        confirm.dismiss();
+//    }
 
-    @Test
-    @DisplayName("Prompt name")
-    public void promptTest() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        driver.findElement(By.id("my-prompt")).click();
-        wait.until(ExpectedConditions.alertIsPresent());
-        Alert prompt = driver.switchTo().alert();
-        prompt.sendKeys("John Doe");
-        assertEquals(prompt.getText(), "Please enter your name");
-        prompt.accept();
-    }
+//    @Test
+//    @DisplayName("Prompt name")
+//    public void promptTest() {
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//        driver.findElement(By.id("my-prompt")).click();
+//        wait.until(ExpectedConditions.alertIsPresent());
+//        Alert prompt = driver.switchTo().alert();
+//        prompt.sendKeys("John Doe");
+//        assertEquals(prompt.getText(), "Please enter your name");
+//        prompt.accept();
+//    }
 
     @Test
     @DisplayName("Modal window test")
@@ -96,5 +95,68 @@ public class DialogBoxesPageTests extends BaseTest{
         assertEquals("Is this correct?", actualAlertText);
 
         dialogBoxesPage.acceptAlert();
+
+        String actualTextUnderConfirmButton = dialogBoxesPage.getTextUnderConfirmButton();
+        assertEquals("You chose: true", actualTextUnderConfirmButton);
     }
+
+    @Test
+    @DisplayName("Dismiss confirm alert")
+    public void dismissConfirmAlertTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openDialogBoxesPage();
+
+        DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
+        dialogBoxesPage.launchConfirm();
+
+        String actualAlertText = dialogBoxesPage.getAlertText();
+        assertEquals("Is this correct?", actualAlertText);
+
+        dialogBoxesPage.dismissAlert();
+
+        String actualTextUnderConfirmButton = dialogBoxesPage.getTextUnderConfirmButton();
+        assertEquals("You chose: false", actualTextUnderConfirmButton);
+    }
+
+    @Test
+    @DisplayName("Enter prompted name and accept")
+    public void enterPromptedNameAndAcceptTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openDialogBoxesPage();
+
+        DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
+        dialogBoxesPage.launchPrompt();
+
+        String actualPromptText = dialogBoxesPage.getAlertText();
+        assertEquals("Please enter your name", actualPromptText);
+
+        dialogBoxesPage.enterPrompt("John Doe");
+        dialogBoxesPage.acceptAlert();
+
+        String actualTextUnderPromptButton = dialogBoxesPage.getTextUnderPromptButton();
+        assertEquals("You typed: John Doe", actualTextUnderPromptButton);
+    }
+
+    @Test
+    @DisplayName("Enter prompted name and cancel")
+    public void enterPromptedNameAndCancelTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openDialogBoxesPage();
+
+        DialogBoxesPage dialogBoxesPage = new DialogBoxesPage(driver);
+        dialogBoxesPage.launchPrompt();
+
+        String actualPromptText = dialogBoxesPage.getAlertText();
+        assertEquals("Please enter your name", actualPromptText);
+
+        dialogBoxesPage.enterPrompt("John Doe");
+        dialogBoxesPage.dismissAlert();
+
+        String actualTextUnderPromptButton = dialogBoxesPage.getTextUnderPromptButton();
+        assertEquals("You typed: null", actualTextUnderPromptButton);
+    }
+
 }

@@ -17,6 +17,8 @@ public class DialogBoxesPage extends BasePage{
     By confirmLocator = By.id("my-confirm");
     By promptLocator = By.id("my-prompt");
     By modalLocator = By.id("my-modal");
+    By textUnderConfirmButtonLocator = By.id("confirm-text");
+    By textUnderPromptButtonLocator = By.id("prompt-text");
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -49,6 +51,27 @@ public class DialogBoxesPage extends BasePage{
     @Step("Dismiss alert")
     public void dismissAlert() {
         driver.switchTo().alert().dismiss();
+    }
+
+    @Step("Verify text under confirm button")
+    public String getTextUnderConfirmButton() {
+        return driver.findElement(textUnderConfirmButtonLocator).getText();
+    }
+
+    @Step("Launch prompt")
+    public void launchPrompt() {
+        driver.findElement(promptLocator).click();
+        wait.until(ExpectedConditions.alertIsPresent());
+    }
+
+    @Step("Enter prompt")
+    public void enterPrompt(String prompt) {
+        driver.switchTo().alert().sendKeys(prompt);
+    }
+
+    @Step("Verify text under prompt button")
+    public String getTextUnderPromptButton() {
+        return driver.findElement(textUnderPromptButtonLocator).getText();
     }
 
 }
