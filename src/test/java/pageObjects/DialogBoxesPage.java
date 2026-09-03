@@ -1,7 +1,6 @@
 package pageObjects;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,14 +10,16 @@ import java.time.Duration;
 
 public class DialogBoxesPage extends BasePage{
 
-    public static final String DIALOG_BOXES_URL = "dialog-boxes.html";
-
     By alertLocator = By.id("my-alert");
     By confirmLocator = By.id("my-confirm");
     By promptLocator = By.id("my-prompt");
     By modalLocator = By.id("my-modal");
     By textUnderConfirmButtonLocator = By.id("confirm-text");
     By textUnderPromptButtonLocator = By.id("prompt-text");
+    By modalWindowBodyLocator = By.xpath("//div[@class='modal-body']");
+    By closeModalWindowLocator = By.xpath("//button[text()='Close']");
+    By saveModalWindowLocator = By.xpath("//button[normalize-space(text())='Save changes']");
+    By textUnderModalButtonLocator = By.id("modal-text");
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
@@ -72,6 +73,32 @@ public class DialogBoxesPage extends BasePage{
     @Step("Verify text under prompt button")
     public String getTextUnderPromptButton() {
         return driver.findElement(textUnderPromptButtonLocator).getText();
+    }
+
+    @Step("Launch modal window")
+    public void launchModalWindow() {
+        driver.findElement(modalLocator).click();
+        wait.until(ExpectedConditions.elementToBeClickable(closeModalWindowLocator));
+    }
+
+    @Step("Get modal window body text")
+    public String getModalWindowText() {
+        return driver.findElement(modalWindowBodyLocator).getText();
+    }
+
+    @Step("Close modal window")
+    public void closeModalWindow() {
+        driver.findElement(closeModalWindowLocator).click();
+    }
+
+    @Step("Save modal window changes")
+    public void saveModalWindow() {
+        driver.findElement(saveModalWindowLocator).click();
+    }
+
+    @Step("Verify text under modal button")
+    public String getTextUnderModalButton() {
+        return driver.findElement(textUnderModalButtonLocator).getText();
     }
 
 }
