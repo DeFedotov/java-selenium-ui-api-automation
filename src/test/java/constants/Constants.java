@@ -3,7 +3,6 @@ package constants;
 public class Constants {
     public static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
     public static final String COOKIES_URL = BASE_URL + "cookies.html";
-    public static final String DIALOG_BOXES_URL = BASE_URL + "dialog-boxes.html";
     public static final String DRAG_AND_DROP_URL = BASE_URL + "drag-and-drop.html";
     public static final String DRAW_IN_CANVAS_URL = BASE_URL + "draw-in-canvas.html";
     public static final String DROP_DOWN_URL = BASE_URL + "dropdown-menu.html";
@@ -20,5 +19,4 @@ public class Constants {
     public static final String SLOW_CALCULATOR_URL = BASE_URL + "slow-calculator.html";
     public static final String WEB_FORM_URL = BASE_URL + "web-form.html";
     public static final String WEB_STORAGE_URL = BASE_URL + "web-storage.html";
-
 }
