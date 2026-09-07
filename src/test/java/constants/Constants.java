@@ -14,7 +14,6 @@ public class Constants {
     public static final String MOUSE_OVER_URL = BASE_URL + "mouse-over.html";
     public static final String NAVIGATION_URL = BASE_URL + "navigation1.html";
     public static final String NOTIFICATIONS_URL = BASE_URL + "notifications.html";
-    public static final String SHADOW_DOM_URL = BASE_URL + "shadow-dom.html";
     public static final String SLOW_CALCULATOR_URL = BASE_URL + "slow-calculator.html";
     public static final String WEB_FORM_URL = BASE_URL + "web-form.html";
     public static final String WEB_STORAGE_URL = BASE_URL + "web-storage.html";

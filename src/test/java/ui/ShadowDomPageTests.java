@@ -1,24 +1,23 @@
 package ui;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebElement;
-import static constants.Constants.SHADOW_DOM_URL;
+import pageObjects.HomePage;
+import pageObjects.ShadowDomPage;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShadowDomPageTests extends BaseTest {
-
-    @BeforeEach
-    public void setup() {
-        driver.get(SHADOW_DOM_URL);
-    }
 
     @Test
     @DisplayName("Shadow DOM test")
     void shadowDomTest() {
-        WebElement content = driver.findElement(By.id("content"));
-        SearchContext shadowRoot = content.getShadowRoot();
-        WebElement textElement = shadowRoot.findElement(By.cssSelector("p"));
-        Assertions.assertEquals(textElement.getText(), "Hello Shadow DOM");
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openShadowDomPage();
+
+        ShadowDomPage shadowDomPage = new ShadowDomPage(driver);
+        String actualShadowDOMText = shadowDomPage.shadowDom();
+
+        assertEquals("Hello Shadow DOM", actualShadowDOMText);
     }
 }
