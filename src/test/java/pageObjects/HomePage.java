@@ -74,4 +74,9 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//a[@href='drag-and-drop.html']")).click();
         return new DragAndDropPage(driver);
     }
+
+    public ShadowDomPage openShadowDomPage() {
+        driver.findElement(By.xpath("//a[@href='shadow-dom.html']")).click();
+        return new ShadowDomPage(driver);
+    }
 }
