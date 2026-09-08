@@ -79,4 +79,9 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//a[@href='shadow-dom.html']")).click();
         return new ShadowDomPage(driver);
     }
+
+    public LoadingImagesPage openLoadingImagesPage() {
+        driver.findElement(By.xpath("//a[@href='loading-images.html']")).click();
+        return new LoadingImagesPage(driver);
+    }
 }
