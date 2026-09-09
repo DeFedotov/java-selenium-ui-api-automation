@@ -84,4 +84,9 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//a[@href='loading-images.html']")).click();
         return new LoadingImagesPage(driver);
     }
+
+    public MouseOverPage openMouseOverPage() {
+        driver.findElement(By.xpath("//a[@href='mouse-over.html']")).click();
+        return new MouseOverPage(driver);
+    }
 }
