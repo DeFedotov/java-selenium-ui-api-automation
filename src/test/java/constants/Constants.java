@@ -10,7 +10,6 @@ public class Constants {
     public static final String IFRAME_URL = BASE_URL + "iframes.html";
     public static final String INFINITE_SCROLL_URL = BASE_URL + "infinite-scroll.html";
     public static final String LONG_PAGE_URL = BASE_URL + "long-page.html";
-    public static final String MOUSE_OVER_URL = BASE_URL + "mouse-over.html";
     public static final String NAVIGATION_URL = BASE_URL + "navigation1.html";
     public static final String NOTIFICATIONS_URL = BASE_URL + "notifications.html";
     public static final String SLOW_CALCULATOR_URL = BASE_URL + "slow-calculator.html";
