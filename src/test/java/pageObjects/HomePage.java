@@ -89,4 +89,9 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//a[@href='mouse-over.html']")).click();
         return new MouseOverPage(driver);
     }
+
+    public SlowCalculatorPage openSlowCalculatorPage() {
+        driver.findElement(By.xpath("//a[@href='slow-calculator.html']")).click();
+        return new SlowCalculatorPage(driver);
+    }
 }

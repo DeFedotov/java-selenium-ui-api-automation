@@ -1,33 +1,32 @@
 package ui;
 
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import static constants.Constants.BASE_URL;
-import static constants.Constants.SLOW_CALCULATOR_URL;
+import pageObjects.HomePage;
+import pageObjects.SlowCalculatorPage;
 
-import java.time.Duration;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SlowCalculatorPageTests extends BaseTest {
 
-    @BeforeEach
-    public void setup() {
-        driver.get(SLOW_CALCULATOR_URL);
-    }
-
     @Test
-    @DisplayName("Slow calulator test")
-    public void slowCalculatorTest() {
-        driver.findElement(By.xpath("//span[text()='5']")).click();
-        driver.findElement(By.xpath("//span[text()='x']")).click();
-        driver.findElement(By.xpath("//span[text()='7']")).click();
-        driver.findElement(By.xpath("//span[text()='=']")).click();
+    @DisplayName("Slow calculator test")
+    public void slowCalculatorTest2() {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openSlowCalculatorPage();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.textToBe(By.className("screen"), "35"));
+        SlowCalculatorPage slowCalculatorPage = new SlowCalculatorPage(driver);
+
+        slowCalculatorPage
+                .clickOnButton("5")
+                .clickOnButton("x")
+                .clickOnButton("7")
+                .clickOnButton("=");
+
+        String expectedResult = "35";
+        String actualResult = slowCalculatorPage.getResult(expectedResult);
+
+        assertEquals(expectedResult, actualResult);
     }
 }
