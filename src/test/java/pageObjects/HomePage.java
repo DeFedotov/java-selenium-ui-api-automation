@@ -94,4 +94,9 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//a[@href='slow-calculator.html']")).click();
         return new SlowCalculatorPage(driver);
     }
+
+    public WebStoragePage openWebStoragePage() {
+        driver.findElement(By.xpath("//a[@href='web-storage.html']")).click();
+        return new WebStoragePage(driver);
+    }
 }

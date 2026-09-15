@@ -3,7 +3,11 @@ package ui;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import pageObjects.HomePage;
+import pageObjects.WebStoragePage;
+
 import static constants.Constants.WEB_STORAGE_URL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WebStoragePageTests extends BaseTest{
 
@@ -27,14 +31,53 @@ public class WebStoragePageTests extends BaseTest{
 //            log.debug("Session storage: {}={}", key, value);
         }
 
-        Assertions.assertEquals(2, sessionStorageSize);
+        assertEquals(2, sessionStorageSize);
 
         js.executeScript("window.sessionStorage.setItem(arguments[0], arguments[1]);", "new element", "new value");
 
         Long updatedSessionStorageSize = (Long) js.executeScript("return window.sessionStorage.length;");
-        Assertions.assertEquals(3, updatedSessionStorageSize);
+        assertEquals(3, updatedSessionStorageSize);
 
         driver.findElement(By.id("display-session")).click();
+    }
+
+    @Test
+    @DisplayName("Get local storage size")
+    public void localStorageTest() {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openWebStoragePage();
+
+        WebStoragePage webStoragePage = new WebStoragePage(driver);
+        Long actualStorageSize = webStoragePage.getStorageSize("localStorage");
+
+        assertEquals(0, actualStorageSize);
+    }
+
+    @Test
+    @DisplayName("Display local storage values")
+    public void localStorageTest2() {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openWebStoragePage();
+
+        WebStoragePage webStoragePage = new WebStoragePage(driver);
+        String actualValues = webStoragePage.displayStorageValues("local");
+
+        assertEquals("{}", actualValues);
+    }
+
+    @Test
+    @DisplayName("Get session storage size")
+    public void sessionStorageTest() {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openWebStoragePage();
+
+        WebStoragePage webStoragePage = new WebStoragePage(driver);
+        Long actualStorageSize = webStoragePage.getStorageSize("sessionStorage");
+
+        assertEquals(2, actualStorageSize);
     }
 
 }
