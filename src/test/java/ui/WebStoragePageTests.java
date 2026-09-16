@@ -1,45 +1,12 @@
 package ui;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import pageObjects.HomePage;
 import pageObjects.WebStoragePage;
 
-import static constants.Constants.WEB_STORAGE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WebStoragePageTests extends BaseTest{
-
-    @BeforeEach
-    public void setup(){
-        driver.get(WEB_STORAGE_URL);
-    }
-
-    @Test
-    @DisplayName("Web Storage test")
-    public void webStorageTest() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        Long localStorageSize = (Long) js.executeScript("return window.localStorage.length;");
-//        log.debug("Local storage elements: {}", localStorageSize);
-
-        Long sessionStorageSize = (Long) js.executeScript("return window.sessionStorage.length;");
-
-        for (int i = 0; i < sessionStorageSize; i++) {
-            String key = (String) js.executeScript("return window.sessionStorage.key(arguments[0]);", i);
-//            String value = (String) js.executeScript("return window.sessionStorage.getItem(arguments[0]);", key);
-//            log.debug("Session storage: {}={}", key, value);
-        }
-
-        assertEquals(2, sessionStorageSize);
-
-        js.executeScript("window.sessionStorage.setItem(arguments[0], arguments[1]);", "new element", "new value");
-
-        Long updatedSessionStorageSize = (Long) js.executeScript("return window.sessionStorage.length;");
-        assertEquals(3, updatedSessionStorageSize);
-
-        driver.findElement(By.id("display-session")).click();
-    }
 
     @Test
     @DisplayName("Get local storage size")
@@ -68,6 +35,20 @@ public class WebStoragePageTests extends BaseTest{
     }
 
     @Test
+    @DisplayName("Set local storage item")
+    public void localStorageTest3() {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openWebStoragePage();
+
+        WebStoragePage webStoragePage = new WebStoragePage(driver);
+        webStoragePage.setStorageValues("local", "new key", "new value");
+        String actualValues = webStoragePage.displayStorageValues("local");
+
+        assertEquals("{\"new key\":\"new value\"}", actualValues);
+    }
+
+    @Test
     @DisplayName("Get session storage size")
     public void sessionStorageTest() {
         HomePage homePage = new HomePage(driver);
@@ -78,6 +59,20 @@ public class WebStoragePageTests extends BaseTest{
         Long actualStorageSize = webStoragePage.getStorageSize("sessionStorage");
 
         assertEquals(2, actualStorageSize);
+    }
+
+    @Test
+    @DisplayName("Set session storage item")
+    public void sessionStorageTest2() {
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openWebStoragePage();
+
+        WebStoragePage webStoragePage = new WebStoragePage(driver);
+        webStoragePage.setStorageValues("session", "new key", "new value");
+        String actualValues = webStoragePage.displayStorageValues("session");
+
+        assertEquals("{\"lastname\":\"Doe\",\"name\":\"John\",\"new key\":\"new value\"}", actualValues);
     }
 
 }

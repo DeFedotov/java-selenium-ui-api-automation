@@ -13,5 +13,4 @@ public class Constants {
     public static final String NAVIGATION_URL = BASE_URL + "navigation1.html";
     public static final String NOTIFICATIONS_URL = BASE_URL + "notifications.html";
     public static final String WEB_FORM_URL = BASE_URL + "web-form.html";
-    public static final String WEB_STORAGE_URL = BASE_URL + "web-storage.html";
 }
