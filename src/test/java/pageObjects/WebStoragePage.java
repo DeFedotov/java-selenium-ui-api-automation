@@ -3,15 +3,19 @@ package pageObjects;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class WebStoragePage extends BasePage{
 
-    By showLocationStorageLocator = By.id("display-local");
-    By showSessionStorageLocator = By.id("display-session");
+
     By getStorageLocator(String storageName) {
         return By.id("display-" + storageName);
     }
+    By getStorageValueLocator(String storageName) {
+        return By.id(storageName + "-storage");
+    }
+
     public WebStoragePage(WebDriver driver) {
         super(driver);
     }
@@ -25,6 +29,12 @@ public class WebStoragePage extends BasePage{
     @Step("Display storage values")
     public String displayStorageValues(String storageName){
         driver.findElement(getStorageLocator(storageName)).click();
-        return storageName;
+        return driver.findElement(getStorageValueLocator(storageName)).getText();
+    }
+
+    @Step("Set storage arguments")
+    public void setStorageValues(String storageName, String key, String value){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window."+storageName+"Storage.setItem(arguments[0], arguments[1]);", key, value);
     }
 }
