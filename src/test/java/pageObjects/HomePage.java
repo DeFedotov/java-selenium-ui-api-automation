@@ -99,4 +99,9 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//a[@href='web-storage.html']")).click();
         return new WebStoragePage(driver);
     }
+
+    public CookiesPage openCookiesPage() {
+        driver.findElement(By.xpath("//a[@href='cookies.html']")).click();
+        return new CookiesPage(driver);
+    }
 }
