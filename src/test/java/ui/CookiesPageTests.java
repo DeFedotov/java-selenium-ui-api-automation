@@ -4,10 +4,13 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import pageObjects.CookiesPage;
+import pageObjects.HomePage;
 
 import java.util.Set;
 
 import static constants.Constants.COOKIES_URL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CookiesPageTests extends BaseTest{
 
@@ -21,11 +24,11 @@ public class CookiesPageTests extends BaseTest{
     public void readCookiesTest() {
         WebDriver.Options options = driver.manage();
         Set<Cookie> cookies = options.getCookies();
-        Assertions.assertEquals(cookies.size(), 2);
+        assertEquals(cookies.size(), 2);
 
         Cookie username = options.getCookieNamed("username");
-        Assertions.assertEquals(username.getValue(), "John Doe");
-        Assertions.assertEquals(username.getPath(), "/");
+        assertEquals(username.getValue(), "John Doe");
+        assertEquals(username.getPath(), "/");
 
         driver.findElement(By.id("refresh-cookies")).click();
     }
@@ -38,7 +41,7 @@ public class CookiesPageTests extends BaseTest{
         options.addCookie(newCookie);
 
         String readValue = options.getCookieNamed(newCookie.getName()).getValue();
-        Assertions.assertEquals(newCookie.getValue(), readValue);
+        assertEquals(newCookie.getValue(), readValue);
 
         driver.findElement(By.id("refresh-cookies")).click();
     }
@@ -52,7 +55,7 @@ public class CookiesPageTests extends BaseTest{
         options.addCookie(editedCookie);
 
         Cookie readCookie  = options.getCookieNamed(username.getName());
-        Assertions.assertEquals(editedCookie, readCookie);
+        assertEquals(editedCookie, readCookie);
 
         driver.findElement(By.id("refresh-cookies")).click();
     }
@@ -65,6 +68,32 @@ public class CookiesPageTests extends BaseTest{
         Cookie username = options.getCookieNamed("username");
         options.deleteCookie(username);
 
-        Assertions.assertEquals(cookies.size()-1, options.getCookies().size());
+        assertEquals(cookies.size()-1, options.getCookies().size());
+    }
+
+    @Test
+    @DisplayName("Get cookies test")
+    public void getCookiesTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openCookiesPage();
+
+        CookiesPage cookiesPage = new CookiesPage(driver);
+
+        int actualCookiesSize = cookiesPage.getCookiesSize();
+        assertEquals(2, actualCookiesSize);
+    }
+
+    @Test
+    @DisplayName("Get cookie by name")
+    public void getCookieByNameTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openCookiesPage();
+
+        CookiesPage cookiesPage = new CookiesPage(driver);
+
+        String actualCookieValue = cookiesPage.getCookieByName("username");
+        assertEquals("John Doe", actualCookieValue);
     }
 }
