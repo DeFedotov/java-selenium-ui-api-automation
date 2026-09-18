@@ -96,4 +96,18 @@ public class CookiesPageTests extends BaseTest{
         String actualCookieValue = cookiesPage.getCookieByName("username");
         assertEquals("John Doe", actualCookieValue);
     }
+
+    @Test
+    @DisplayName("Add cookie test")
+    public void addCookieByNameTest(){
+        HomePage homePage = new HomePage(driver);
+        homePage.openHomePage();
+        homePage.openCookiesPage();
+
+        CookiesPage cookiesPage = new CookiesPage(driver);
+        Cookie newCookie = cookiesPage.addCookie("new-cookie-key", "new-cookie-value");
+
+        String actualNewCookieValue = cookiesPage.getCookieByName(newCookie.getName());
+        assertEquals(newCookie.getValue(), actualNewCookieValue);
+    }
 }

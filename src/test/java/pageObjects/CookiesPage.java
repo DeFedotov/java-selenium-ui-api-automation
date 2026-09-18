@@ -26,9 +26,15 @@ public class CookiesPage extends BasePage{
 
     public String getCookieByName(String cookieName){
         WebDriver.Options options = driver.manage();
-        Set<Cookie> cookies = options.getCookies();
-        Cookie username = options.getCookieNamed("username");
+        Cookie username = options.getCookieNamed(cookieName);
         assert username != null;
         return username.getValue();
+    }
+
+    public Cookie addCookie(String cookieName, String cookieValue){
+        WebDriver.Options options = driver.manage();
+        Cookie cookie = new Cookie(cookieName, cookieValue);
+        options.addCookie(cookie);
+        return cookie;
     }
 }
