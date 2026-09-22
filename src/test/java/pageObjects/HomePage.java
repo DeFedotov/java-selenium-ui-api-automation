@@ -104,4 +104,9 @@ public class HomePage extends BasePage{
         driver.findElement(By.xpath("//a[@href='cookies.html']")).click();
         return new CookiesPage(driver);
     }
+
+    public NavigationPage openNavigationPage() {
+        driver.findElement(By.xpath("//a[@href='navigation1.html']")).click();
+        return new NavigationPage(driver);
+    }
 }
