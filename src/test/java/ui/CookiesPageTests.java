@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CookiesPageTests extends BaseTest{
 
-
     @Test
     @DisplayName("Get cookies test")
     public void getCookiesTest(){
@@ -68,14 +67,13 @@ public class CookiesPageTests extends BaseTest{
 
     @Test
     @DisplayName("Delete cookie test")
-    public void deleteCookieByNameTest() throws InterruptedException {
+    public void deleteCookieByNameTest() {
         HomePage homePage = new HomePage(driver);
         homePage.openHomePage();
         homePage.openCookiesPage();
 
         CookiesPage cookiesPage = new CookiesPage(driver);
         cookiesPage.deleteCookie("username");
-        Thread.sleep(3000);
 
         assertEquals(1, cookiesPage.getCookiesSize());
     }
