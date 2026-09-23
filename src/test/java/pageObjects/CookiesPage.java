@@ -1,15 +1,17 @@
 package pageObjects;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.Set;
 
 public class CookiesPage extends BasePage{
 
-    By refreshCookiesLocator = By.id("refresh-cookies");
+    @FindBy(id="refresh-cookies")
+    private WebElement refreshCookiesLocator;
 
     public CookiesPage(WebDriver driver) {
         super(driver);
@@ -17,7 +19,7 @@ public class CookiesPage extends BasePage{
 
     @Step("Refresh cookies")
     public void refreshCookies() {
-        driver.findElement(refreshCookiesLocator).click();
+        refreshCookiesLocator.click();
     }
 
     @Step("Get cookies size")

@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
@@ -12,7 +13,9 @@ public class HomePage extends BasePage{
 
     By chapterLocator = By.cssSelector("h5.card-title");
     By linkLocator = By.xpath("./../a");
-    By titleLocator = By.xpath("//h1[@class='display-4']");
+
+    @FindBy(xpath = "//h1[@class='display-4']")
+    private WebElement titleLocator;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -30,14 +33,14 @@ public class HomePage extends BasePage{
 
     @Step("Get Home Page Title")
     public String getHomePageTitle() {
-        return driver.findElement(titleLocator).getText();
+        return titleLocator.getText();
     }
 
     @Step("Count all chapters on Home Page")
     public int countChapters(){
         int qtyChapters = 0;
         List<WebElement> chapters = driver.findElements(chapterLocator);
-        for (WebElement chapter : chapters) {
+        for (WebElement _ : chapters) {
             qtyChapters += 1;
         }
         return qtyChapters;
@@ -46,7 +49,7 @@ public class HomePage extends BasePage{
     @Step("Count and click all Home Page chapters links")
     public int countAndClickLinks() {
         int qtyLinks = 0;
-        List<WebElement> chapters = driver.findElements(chapterLocator);
+        List<WebElement> chapters = driver.findElements((By) chapterLocator);
         for (WebElement chapter : chapters) {
             List<WebElement> links = chapter.findElements(linkLocator);
             qtyLinks += links.size();
