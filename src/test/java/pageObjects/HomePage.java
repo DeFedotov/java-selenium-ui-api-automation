@@ -40,7 +40,7 @@ public class HomePage extends BasePage{
     public int countChapters(){
         int qtyChapters = 0;
         List<WebElement> chapters = driver.findElements(chapterLocator);
-        for (WebElement _ : chapters) {
+        for (WebElement chapter : chapters) {
             qtyChapters += 1;
         }
         return qtyChapters;
