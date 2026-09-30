@@ -56,7 +56,7 @@ jobs:
         path: gh-pages
 
     - name: Build Report
-      uses: simple-elf/allure-report-action@v1.10
+      uses: simple-elf/allure-report-action@master
       if: always()
       with:
         allure_results: build/allure-results
@@ -65,8 +65,8 @@ jobs:
 
     - name: Publish Report
       if: always()
-      uses: peaceiris/actions-gh-pages@v2
-      env:
-        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-history
