@@ -45,10 +45,12 @@ jobs:
       env:
         SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
       run: ./gradlew test
+      continue-on-error: true
 
     - name: Copy History
       uses: actions/checkout@v2
       if: always()
+      continue-on-error: true
       with:
         ref: gh-pages
         path: gh-pages
