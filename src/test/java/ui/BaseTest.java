@@ -2,16 +2,21 @@ package ui;
 
 import configs.TestPropertiesConfig;
 import extensions.AllureExtension;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Feature;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
-
-import static patterns.WebDriverFactory.createWebDriver;
+import java.util.Map;
 
 @Feature("Extensions")
 @ExtendWith(AllureExtension.class)
@@ -19,13 +24,9 @@ public class BaseTest {
     public static WebDriver driver;
     static TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
 
-    public static WebDriver getDriver() {
-        return driver;
-    }
-
     @BeforeEach
     public void setUp() {
-        driver = createWebDriver(configProperties.browser());
+        initDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
@@ -33,5 +34,21 @@ public class BaseTest {
     @AfterEach
     public void tearDown() {
         driver.quit();
+    }
+
+    private void initDriver() {
+        String remoteUrl = System.getenv("SELENIUM_REMOTE_URL");
+        Allure.addAttachment("Remote URL", remoteUrl);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
+        try {
+            driver = new RemoteWebDriver(new URL(remoteUrl), options);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Malformed URL for remote URL: " + remoteUrl, e);
+        }
     }
 }
