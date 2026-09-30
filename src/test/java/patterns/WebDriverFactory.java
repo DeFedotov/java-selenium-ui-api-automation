@@ -29,7 +29,7 @@ public class WebDriverFactory {
         return driver;
     }
 
-    private static WebDriver getChromeDriver() {
+    public static WebDriver getChromeDriver() {
         WebDriver driver;
         String remoteUrl = configProperties.remoteUrl();
 

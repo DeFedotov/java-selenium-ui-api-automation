@@ -21,7 +21,7 @@ import java.util.Map;
 @Feature("Extensions")
 @ExtendWith(AllureExtension.class)
 public class BaseTest {
-    public static WebDriver driver;
+    static WebDriver driver;
     static TestPropertiesConfig configProperties = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
 
     @BeforeEach
@@ -31,24 +31,33 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
     @AfterEach
-    public void tearDown() {
-        driver.quit();
+    void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     private void initDriver() {
         String remoteUrl = System.getenv("SELENIUM_REMOTE_URL");
-        Allure.addAttachment("Remote URL", remoteUrl);
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
-        try {
-            driver = new RemoteWebDriver(new URL(remoteUrl), options);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Malformed URL for remote URL: " + remoteUrl, e);
+        if (remoteUrl != null && !remoteUrl.isEmpty()) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
+            try {
+                driver = new RemoteWebDriver(new URL(remoteUrl), options);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException("Malformed URL for remote URL: " + remoteUrl, e);
+            }
+        } else {
+            driver = new ChromeDriver();
         }
     }
 }
