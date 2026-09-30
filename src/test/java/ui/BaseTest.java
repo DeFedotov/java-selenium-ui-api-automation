@@ -27,7 +27,7 @@ public class BaseTest {
     @BeforeEach
     public void setUp() {
         initDriver();
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
@@ -51,6 +51,8 @@ public class BaseTest {
             options.addArguments("--disable-gpu");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--use-fake-ui-for-media-stream");
+            options.addArguments("--deny-permission-prompts=false");
             options.setCapability("goog:loggingPrefs", Map.of("browser", "ALL"));
             try {
                 driver = new RemoteWebDriver(new URL(remoteUrl), options);
