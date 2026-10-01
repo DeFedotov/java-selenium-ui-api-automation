@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CookiesPageTests extends BaseTest{
 
     @Test
+    @Tag("smoke")
     @DisplayName("Get cookies test")
     public void getCookiesTest(){
         HomePage homePage = new HomePage(driver);
@@ -23,6 +24,7 @@ public class CookiesPageTests extends BaseTest{
     }
 
     @Test
+    @Tag("smoke")
     @DisplayName("Get cookie by name")
     public void getCookieByNameTest(){
         HomePage homePage = new HomePage(driver);

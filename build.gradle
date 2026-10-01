@@ -23,3 +23,28 @@ test {
     useJUnitPlatform()
     systemProperties(System.getProperties())
 }
+
+tasks.register('smokeTest', Test) {
+    group = 'verification'
+    description = 'Runs smoke tests'
+
+    testClassesDirs = tasks.test.testClassesDirs
+    classpath = tasks.test.classpath
+
+    useJUnitPlatform(){
+        includeTags 'smoke'
+    }
+}
+
+tasks.register('noDefectsTests', Test) {
+    group = 'verification'
+    description = 'Runs only working tests'
+
+    testClassesDirs = tasks.test.testClassesDirs
+    classpath = tasks.test.classpath
+
+    useJUnitPlatform(){
+//        includeTags 'smoke'
+        excludeTags 'defect'
+    }
+}
