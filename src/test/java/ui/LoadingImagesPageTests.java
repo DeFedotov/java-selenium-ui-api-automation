@@ -13,6 +13,7 @@ public class LoadingImagesPageTests extends BaseTest{
 
     @Order(1)
     @Test
+    @Tag("defect")
     @DisplayName("Loading images using implicit wait test")
     public void loadingImagesImplicitWaitTest(){
         HomePage homePage = new HomePage(driver);

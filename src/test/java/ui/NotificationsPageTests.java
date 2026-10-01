@@ -18,6 +18,7 @@ public class NotificationsPageTests extends BaseTest {
     }
 
     @Test
+    @Tag("defect")
     @DisplayName("Notification test with safe mock")
     void notificationsTest() {
         ChromeOptions options = new ChromeOptions();
